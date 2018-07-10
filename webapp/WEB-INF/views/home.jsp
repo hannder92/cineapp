@@ -11,6 +11,7 @@
 <meta name="author" content="">
 <title>CineSite | Bienvenido</title>
 <spring:url value="/resources" var="urlPublic"></spring:url>
+<spring:url value="/" var="urlRoot"></spring:url>
 <link href="${ urlPublic }/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${ urlPublic }/bootstrap/css/theme.css" rel="stylesheet">
@@ -68,12 +69,19 @@
 				<h2 class="text text-center">
 					<span class="label label-success">EN CARTELERA</span>
 				</h2>
-				<form class="form-inline" action="#" method="post">
+				<form class="form-inline" action="${ urlRoot }search" method="post">
 					<div class="form-group">
-						<label for="fecha">Fecha: </label> <select id="fecha" name="fecha"
+						<label for="fecha">Fecha: </label> <select id="fecha" name="date"
 							class="form-control">
 							<c:forEach items="${ dates }" var="date">
-								<option value="${ date }">${ date }</option>
+								<c:choose>
+									<c:when test="${ searchDate eq date }">
+										<option value="${ date }" selected>${ date }</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${ date }">${ date }</option>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</select>
 					</div>

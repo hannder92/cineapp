@@ -28,6 +28,18 @@ public class HomeController {
     }
 
     @RequestMapping(
+            value = "/search",
+            method = RequestMethod.POST)
+    public String search(@RequestParam("date") String date, Model model) {
+        List<String> dateList = Utils.getNextDays(4);
+        List<Movie> movies = getList();
+        model.addAttribute("dates", dateList);
+        model.addAttribute("movies", movies);
+        model.addAttribute("searchDate", date);
+        return "home";
+    }
+
+    @RequestMapping(
             value = "/",
             method = RequestMethod.GET)
     public String showPrincipal(Model model) {
